@@ -1,0 +1,261 @@
+##################################################
+# Network security rules
+##################################################
+resource "azurerm_network_security_rule" "remote_ssh" {
+  name                                       = "allow_remote_ssh"
+  description                                = "Allow ssh acces to sas environment"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "22"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "101"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+resource "azurerm_network_security_rule" "out_puppet" {
+  name                                       = "allow_out_puppet"
+  description                                = "Allow connection to puppet master ims"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "8140"
+  source_address_prefix                      = "*"
+  destination_address_prefix                 = "*"
+  access                                     = "Allow"
+  priority                                   = "102"
+  direction                                  = "Outbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+resource "azurerm_network_security_rule" "remote_metadata" {
+  name                                       = "allow_remote_metadata"
+  description                                = "Allow acces to metadata server"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "8561"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "201"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+resource "azurerm_network_security_rule" "remote_object_spwaner" {
+  name                                       = "allow_remote_object_spwaner"
+  description                                = "Allow acces to metadata server"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "8581"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "301"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+resource "azurerm_network_security_rule" "remote_workspace_serve" {
+  name                                       = "allow_remote_workspace_serve"
+  description                                = "Allow acces to Workspace Serve"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "8591"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "302"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+resource "azurerm_network_security_rule" "remote_olap_server" {
+  name                                       = "allow_remote_olap_server"
+  description                                = "Allow acces to OLAP Server"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "5451"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "303"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+resource "azurerm_network_security_rule" "remote_connect_spwaner" {
+  name                                       = "allow_remote_connect_spawner"
+  description                                = "Allow acces to Connect Spawner"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "7541"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "304"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+resource "azurerm_network_security_rule" "remote_connect_server" {
+  name                                       = "allow_remote_connect_server"
+  description                                = "Allow acces to Connect Server"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "7551"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "305"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+resource "azurerm_network_security_rule" "remote_share_server" {
+  name                                       = "allow_remote_share_server"
+  description                                = "Allow acces to Share Server"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "8551"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "306"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+resource "azurerm_network_security_rule" "remote_stored_process_server_1" {
+  name                                       = "allow_remote_stored_process_server_1"
+  description                                = "Allow acces to Stored Process Server"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "8601"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "307"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+
+resource "azurerm_network_security_rule" "remote_stored_process_server_2" {
+  name                                       = "allow_remote_stored_process_server_2"
+  description                                = "Allow acces to Stored Process Server"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "8611"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "308"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+resource "azurerm_network_security_rule" "remote_stored_process_server_3" {
+  name                                       = "allow_remote_stored_process_server_3"
+  description                                = "Allow acces to Stored Process Server"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "8621"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "309"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+resource "azurerm_network_security_rule" "remote_stored_process_server_4" {
+  name                                       = "allow_remote_stored_process_server_4"
+  description                                = "Allow acces to Stored Process Server"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "8631"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "310"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+resource "azurerm_network_security_rule" "remote_pooled_workspace" {
+  name                                       = "allow_remote_pooled_workspace"
+  description                                = "Allow acces to pooled workspace"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "8701"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "311"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+
+resource "azurerm_network_security_rule" "remote_web_server" {
+  name                                       = "allow_remote_webserver"
+  description                                = "Allow acces to Web Server"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "7980"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "401"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+resource "azurerm_network_security_rule" "remote_web_server_secure" {
+  name                                       = "allow_remote_webserver_secure"
+  description                                = "Allow acces to Web Server Secure"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "8443"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups["sas"]]
+  access                                     = "Allow"
+  priority                                   = "402"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+resource "azurerm_network_security_rule" "remote_sas_environment_manager" {
+  name                                       = "allow_remote_sas_environment_manager"
+  description                                = "Allow acces to SAS Environment Manager"
+  protocol                                   = "Tcp"
+  source_port_range                          = "*"
+  destination_port_range                     = "7079"
+  source_address_prefix                      = "*"
+  destination_application_security_group_ids = [data.terraform_remote_state.sas-base.outputs.application_security_groups.sas]
+  access                                     = "Allow"
+  priority                                   = "403"
+  direction                                  = "Inbound"
+  resource_group_name                        = "${azurerm_resource_group.rg.name}"
+  network_security_group_name                = "${azurerm_network_security_group.nsg.name}"
+}
+
+

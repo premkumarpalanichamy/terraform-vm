@@ -1,0 +1,90 @@
+pipeline {
+    agent {
+        node {
+            label "deploy-${ENVIRONMENT}"
+        }
+    }
+    environment {
+        BACKEND_ACCESS_KEY = "${STACK}/terraform/backend"
+        BACKEND_blob_container = "${ENVIRONMENT}.tfvars"
+        VAR_FILE_NAME = "${ENVIRONMENT}-${STACK}.tfvars"
+        BITBUCKET_CREDENTIALS = "2c1112f9-fa42-4680-a65b-718c609d0378"
+    }
+    stages {
+        stage('Checkout repository') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Runs <terraform get>') {
+            steps {
+              sshagent(["${BITBUCKET_CREDENTIALS}"]){
+                sh '''
+                    terraform get -update=true ./
+                   '''
+              }
+            }
+        }
+        stage('Runs <terraform init>') {
+            steps {
+              sshagent(["${BITBUCKET_CREDENTIALS}"]){
+                sh '''
+                    terraform init -backend=true -input=false -backend-config=./backend/backend-sasdev.tfvars
+                    terraform init -backend=true -input=false -backend-config="./backend/${BACKEND_blob_container}" -backend-config="key=${BACKEND_S3_KEY}" ./
+                   '''
+              }
+            }
+        }
+        stage('Runs <terraform plan>') {
+            steps {
+              sshagent(["${BITBUCKET_CREDENTIALS}"]){
+                script {
+                    def plan = " 'terraform plan -out=tfplan -input=false -var-file=./tfvars/sasdev.tfvars' "
+                    def plan = "'terraform plan -out=tfplan -input=false -var-file="./tfvars/${VAR_FILE_NAME}"" '
+                    if ("$TF_DESTROY" == "true") {
+                        plan = plan + ' -destroy'
+                    }
+                    plan = plan + ' ./src'
+
+                    def planExitCode = sh(script: plan, returnStatus: true)
+
+                    if (planExitCode == 1) {
+                        error 'Error executing Terraform plan.'
+                    }
+                }
+              }
+            }
+        }
+        stage('Asks approval for <terraform apply>') {
+            steps {
+                script {
+                    def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
+                }
+            }
+        }
+        stage('Runs <terraform apply>') {
+            steps {
+                sshagent(["${BITBUCKET_CREDENTIALS}"]){
+                    sh '''
+                        terraform apply -lock=false -input=false tfplan
+                       '''
+                }
+            }
+        }
+    }
+}
+def RunTerraform(String ENV) {
+	checkout scm
+	sshagent(["${BITBUCKET_CREDENTIALS}"]){
+		sh '''
+		terraform init -backend=true -input=false -upgrade -backend-config="./tfvars/backend-${ENV}.tfvars" .
+		terraform plan -out=${ENV}-tfplan -input=false -var-file="./tfvars/${ENV}.tfvars" -var="tag_version=${TAG_VERSION}" .
+		terraform apply -lock=false -input=false ${ENV}-tfplan
+		'''
+		/* sh '''
+		terraform init -backend=true -input=false -upgrade -backend-config="./tfvars/backend-${ENV}.tfvars" .
+		terraform destroy -lock=false -input=false ${ENV}-tfplan
+		terraform destroy -lock=false -var-file=./tfvars/sasdev.tfvars
+		''' */
+	}
+}

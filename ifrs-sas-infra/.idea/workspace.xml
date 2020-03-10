@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d8793159-57af-4002-b70c-403159d0c78c" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1YOYUpqvKDxpWGwcDxEefYoNAxx" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d8793159-57af-4002-b70c-403159d0c78c" name="Default Changelist" comment="" />
+      <created>1582815126320</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582815126320</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="522" y="222" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1583794007572">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="522" y="222" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1583794007572" />
+    <state x="348" y="210" key="#com.intellij.fileTypes.FileTypeChooser/1280.-57.1536.824/-1920.-46.1536.824/0.0.1024.779@0.0.1024.779" timestamp="1583490696688" />
+    <state x="-1471" y="97" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1583314956679">
+      <screen x="-1920" y="-46" width="1536" height="824" />
+    </state>
+    <state x="-1471" y="97" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/1280.-57.1536.824/-1920.-46.1536.824/0.0.1024.779@-1920.-46.1536.824" timestamp="1583314956679" />
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1583791865872">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1583791865872" />
+    <state x="440" y="157" key="FileChooserDialogImpl" timestamp="1583786071172">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="440" y="157" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1583786071172" />
+    <state x="293" y="148" key="FileChooserDialogImpl/1280.-57.1536.824/-1920.-46.1536.824/0.0.1024.779@0.0.1024.779" timestamp="1583493516753" />
+    <state x="430" y="46" key="SettingsEditor" timestamp="1583794232961">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="430" y="46" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1583794232961" />
+    <state x="477" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1583786900793">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="477" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1583786900793" />
+    <state x="-1443" y="194" key="com.intellij.ide.util.TipDialog/1280.-57.1536.824/-1920.-46.1536.824/0.0.1024.779@-1920.-46.1536.824" timestamp="1583490425966" />
+    <state x="431" y="145" key="search.everywhere.popup" timestamp="1583792938118">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1583792938118" />
+  </component>
+</project>
